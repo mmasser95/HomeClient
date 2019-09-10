@@ -7,7 +7,7 @@
       <v-app-bar-nav-icon @click="drawer=!drawer">
         <v-icon>menu</v-icon>
       </v-app-bar-nav-icon>
-      <v-toolbar-title>Iik</v-toolbar-title>
+      <v-toolbar-title>HomeController</v-toolbar-title>
       <div class="flex-grow-1"></div>
       <v-menu offset-y :close-on-click="false" :close-on-content-click="false" v-if="!getToken">
         <template v-slot:activator="{on}">
@@ -32,7 +32,7 @@
         </v-list>
       </v-menu>
 
-      <v-btn icon v-if="getToken" to="/nuevaPuerta">
+      <v-btn icon v-if="getToken" to="/nuevoRecurso">
         <v-icon>add</v-icon>
       </v-btn>
     </v-app-bar>
@@ -99,7 +99,7 @@ export default {
           {
             text: "Nueva Puerta",
             icon: "meeting_room",
-            href: "/nuevaPuerta"
+            href: "/nuevoRecurso"
           }
         ];
       } else {

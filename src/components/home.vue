@@ -42,9 +42,9 @@ const apiserv = new APIService();
 export default {
   name: "Home",
   asyncComputed: {
-    puertas: function() {
+    recursos: function() {
       return apiserv
-        .getPuertas()
+        .getRecursos()
         .then(res => {
           return res.data.data;
         })
@@ -58,7 +58,7 @@ export default {
     ...mapGetters(["getToken", "getBaseUrl"])
   },
   watch: {
-    puertas: function(val) {
+    recursos: function(val) {
       this.tabledata = val;
     }
   },

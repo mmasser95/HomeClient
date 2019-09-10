@@ -19,15 +19,15 @@ export default class APIService {
       .then((res) => res)
       .catch((err) => err);
   }
-  getPuertas() {
+  getRecursos() {
     return axios
-      .get(`${store.getters.getBaseUrl}puerta`, getHeaders())
+      .get(`${store.getters.getBaseUrl}recurso`, getHeaders())
       .then((res) => res)
       .catch((err) => err);
   }
-  postPuerta() {
+  postRecurso(data) {
     return axios
-      .post(`${store.getters.getBaseUrl}puerta`, getHeaders())
+      .post(`${store.getters.getBaseUrl}recurso`,data,getHeaders())
       .then((res) => res)
       .catch((err) => err);
   }
