@@ -31,7 +31,12 @@
           </v-layout>
           <v-layout row wrap>
             <v-flex xs12>
-              <v-text-field type="text" label="Tipo" v-model="form.d.tipo" :rules="form.r.tipo"></v-text-field>
+              <v-select
+                :menu-props="{ top: true, offsetY: true }"
+                label="Tipo"
+                v-model="form.d.tipo"
+                :items="form.tipo"
+              ></v-select>
             </v-flex>
           </v-layout>
           <v-layout row wrap>
@@ -62,6 +67,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import APIService from "@/APIService";
+import catchErr from "@/services";
 const apiserv = new APIService();
 export default {
   name: "nuevoRecurso",
@@ -70,34 +76,51 @@ export default {
       let vth = this;
       apiserv
         .postRecurso(vth.form.d)
-        .then(res => {})
-        .catch(err => {});
+        .then(res => {
+          alert("Recurso creado");
+          vth.$router.push("/home");
+        })
+        .catch(err => {
+          return catchErr(err);
+        });
     }
   },
   data: function() {
     return {
       form: {
-          valid:null,
+        tipo: [
+          { text: "Puerta", value: 1 },
+          { text: "Luz", value: 2 },
+          { text: "Sensor", value: 3 }
+        ],
+        valid: null,
         r: {
           nombre: [
             v => !!v || "Campo requerido",
             v => v.length > 5 || "6 Caracteres como mínimo"
           ],
           passw: [
-              v=>!!v||'Campo requerido',
-              v=>!!v.match(/^\d{4}$/g)||'4 Digitos'
+            v => !!v || "Campo requerido",
+            v => !!v.match(/^\d{4}$/g) || "4 Digitos"
           ],
-          tipo: [v=>!!v||'Campo requerido',],
-          pin: [v=>!!v||'Campo requerido',],
-          tActivo: [v=>!!v||'Campo requerido',]
+          tipo: [v => !!v || "Campo requerido"],
+          pin: [v => !!v || "Campo requerido"],
+          tActivo: [v => !!v || "Campo requerido"]
         },
         d: { nombre: "", passw: "", tipo: "", pin: "", tActivo: "" }
       }
     };
   },
-  computed: {},
+  computed: {
+    ...mapGetters(["getToken"])
+  },
   asyncComputed: {},
-  watch: {}
+  watch: {},
+  created: function() {
+    if (!this.getToken) {
+      this.$router.push("/login");
+    }
+  }
 };
 </script>
 

@@ -28,6 +28,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import APIService from "@/APIService";
+import catchErr from "@/services";
 const apiserv = new APIService();
 export default {
   name: "Login",
@@ -64,13 +65,7 @@ export default {
           vth.$router.push("/home");
         })
         .catch(function(err) {
-          if (err.response) {
-            alert(`Error ${err.response.status}: ${err.response.data.message}`);
-          } else if (err.request) {
-            alert(err.request);
-          } else {
-            console.log("err :", err);
-          }
+          return catchErr(err);
         });
     }
   },

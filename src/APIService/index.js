@@ -27,7 +27,7 @@ export default class APIService {
   }
   postRecurso(data) {
     return axios
-      .post(`${store.getters.getBaseUrl}recurso`,data,getHeaders())
+      .post(`${store.getters.getBaseUrl}recurso`, data, getHeaders())
       .then((res) => res)
       .catch((err) => err);
   }

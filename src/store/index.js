@@ -1,12 +1,12 @@
-import Vue from "vue";
-import Vuex from "vuex";
+import Vue from 'vue';
+import Vuex from 'vuex';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    token: "",
-    username: "",
-    baseurl: ""
+    token: '',
+    username: '',
+    baseurl: '',
   },
   getters: {
     getToken(state) {
@@ -17,24 +17,24 @@ export default new Vuex.Store({
     },
     getUsername(state) {
       return state.username;
-    }
+    },
   },
   mutations: {
     setToken(state, token) {
-      localStorage.setItem('token',token)
+      localStorage.setItem('token', token);
       state.token = token;
     },
     setBaseUrl(state, baseurl) {
-      localStorage.setItem('baseUrl', baseurl)
+      localStorage.setItem('baseUrl', baseurl);
       state.baseurl = baseurl;
     },
     setUsername(state, username) {
       state.username = username;
-    }
+    },
   },
   actions: {
-    authenticate: ({ commit }, token) => commit("setToken", token),
-    usernameSetter: ({ commit }, username) => commit("setUsername", username),
-    baseurlSetter: ({ commit }, baseurl) => commit("setBaseUrl", baseurl)
-  }
+    authenticate: ({ commit }, token) => commit('setToken', token),
+    usernameSetter: ({ commit }, username) => commit('setUsername', username),
+    baseurlSetter: ({ commit }, baseurl) => commit('setBaseUrl', baseurl),
+  },
 });

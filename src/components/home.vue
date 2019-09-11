@@ -39,6 +39,7 @@
 import { mapGetters, mapActions } from "vuex";
 import APIService from "@/APIService";
 const apiserv = new APIService();
+import catchErr from "@/services";
 export default {
   name: "Home",
   asyncComputed: {
@@ -49,8 +50,7 @@ export default {
           return res.data.data;
         })
         .catch(err => {
-          alert(`Error: ${err.response.status}`);
-          return false;
+          return catchErr(err);
         });
     }
   },
